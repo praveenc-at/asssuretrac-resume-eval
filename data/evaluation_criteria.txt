@@ -1,0 +1,14 @@
+Analyze the attached resumes and compare them against the AWS Data Engineer Job Description (focusing on SQL, Python, and AWS services). Generate a structured summary with key details to shortlist candidates.
+
+Output Requirements:
+Candidate Name – Full name.
+Current Role – Most recent job titl
+Years of Experience – Total relevant experience in data engineering.
+SQL Proficiency (1-5 Rating) – Rate based on keywords, projects, and experience (e.g., "optimized complex queries" = 4 or 5).
+Python Proficiency (1-5 Rating) – Rate based on scripting, ETL, and AWS integrations (e.g., "Pandas, PySpark" = 5).
+AWS Skills – List relevant AWS services mentioned (e.g., Glue, Redshift, Lambda).
+AWS Experience (Years) – Hands-on AWS experience.
+Data Pipeline Experience (Yes/No) – If they built ETL/ELT pipelines.
+Relevant Certifications – AWS/GCP certs (e.g., "AWS Certified Data Analytics").
+Overall Fit (%) – Percentage match to JD (weighted average: SQL 30%, Python 30%, AWS 25%, Experience/Certs 15%).
+
