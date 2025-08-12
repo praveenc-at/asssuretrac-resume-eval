@@ -5,6 +5,7 @@ import { ChatOpenAI } from "@langchain/openai";
 import { z } from "zod";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+console.log("Using OpenAI API Key:", process.env.OPENAI_API_KEY);
 /* ---------------------------
   Helpers: read file contents (txt, pdf, docx)
   Works for File (client) or server-like objects exposing arrayBuffer()
@@ -191,7 +192,11 @@ export async function extractOutputColumns(
 ): Promise<string[]> {
   console.log("Extracting output columns...");
   // The SDK will pick API key from process.env.OPENAI_API_KEY if available in server env
-  const llm = new ChatOpenAI({ model: llmModel, temperature: 0 });
+  const llm = new ChatOpenAI({
+    model: llmModel,
+    temperature: 0,
+    apiKey: process.env.OPENAI_API_KEY,
+  });
   const agent = createReactAgent({
     llm,
     tools: [],
@@ -236,16 +241,16 @@ ${evaluationCriteriaText}
   } catch (err) {
     console.warn("Agent.invoke error while extracting columns:", err);
     // fallback: direct LLM call (best-effort)
-    try {
-      const prompt = `SYSTEM:\n${systemPrompt}\n\nUSER:\n${userPrompt}`;
-      const llmResp = await llm.call([
-        { role: "user", content: prompt } as any,
-      ]);
-      raw = llmResp;
-    } catch (e) {
-      console.error("Direct LLM fallback during column extraction failed:", e);
-      raw = null;
-    }
+    // try {
+    //   const prompt = `SYSTEM:\n${systemPrompt}\n\nUSER:\n${userPrompt}`;
+    //   const llmResp = await llm.call([
+    //     { role: "user", content: prompt } as any,
+    //   ]);
+    //   raw = llmResp;
+    // } catch (e) {
+    //   console.error("Direct LLM fallback during column extraction failed:", e);
+    //   raw = null;
+    // }
   }
 
   console.log("Raw agent response (extractOutputColumns):", raw);
@@ -409,7 +414,11 @@ export async function evaluateResumesWithLangGraphAgent(
   );
 
   // Create agent for per-resume evaluation with structured response format
-  const llm = new ChatOpenAI({ model: llmModel, temperature: 0 });
+  const llm = new ChatOpenAI({
+    model: llmModel,
+    temperature: 0,
+    apiKey: process.env.OPENAI_API_KEY,
+  });
   const agent = createReactAgent({
     llm,
     tools: [],
