@@ -3,9 +3,12 @@ import { UploadedFile, EvaluationResponse } from "./types";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { ChatOpenAI } from "@langchain/openai";
 import { z } from "zod";
+import dotenv from "dotenv";
+dotenv.config();
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-console.log("Using OpenAI API Key:", process.env.OPENAI_API_KEY);
+// const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+// console.log("Using OpenAI API Key:", process.env.OPENAI_API_KEY);
+// const OPENAI_API_KEY="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";
 /* ---------------------------
   Helpers: read file contents (txt, pdf, docx)
   Works for File (client) or server-like objects exposing arrayBuffer()
@@ -192,10 +195,13 @@ export async function extractOutputColumns(
 ): Promise<string[]> {
   console.log("Extracting output columns...");
   // The SDK will pick API key from process.env.OPENAI_API_KEY if available in server env
+  console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
+
   const llm = new ChatOpenAI({
     model: llmModel,
     temperature: 0,
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey:
+      "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",
   });
   const agent = createReactAgent({
     llm,
@@ -417,7 +423,8 @@ export async function evaluateResumesWithLangGraphAgent(
   const llm = new ChatOpenAI({
     model: llmModel,
     temperature: 0,
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey:
+      "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",
   });
   const agent = createReactAgent({
     llm,
@@ -458,6 +465,7 @@ ${r.text}
           { role: "user", content: userPrompt },
         ],
       });
+      console.log("Agent.invoke successful for resume:", raw);
     } catch (err) {
       console.warn(
         "Agent.invoke failed for resume; attempting LLM fallback:",
