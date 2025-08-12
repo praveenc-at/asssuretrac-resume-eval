@@ -3,8 +3,6 @@ import { UploadedFile, EvaluationResponse } from "./types";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { ChatOpenAI } from "@langchain/openai";
 import { z } from "zod";
-import dotenv from "dotenv";
-dotenv.config();
 
 // const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 // console.log("Using OpenAI API Key:", process.env.OPENAI_API_KEY);
