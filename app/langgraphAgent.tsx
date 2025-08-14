@@ -3,7 +3,6 @@ import { UploadedFile, EvaluationResponse } from "./types";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { ChatOpenAI } from "@langchain/openai";
 import { z } from "zod";
-import "dotenv/config";
 // const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 // console.log("Using OpenAI API Key:", OPENAI_API_KEY);
 // console.log("Using OpenAI API Key:", process.env.OPENAI_API_KEY);
@@ -12,7 +11,7 @@ import "dotenv/config";
   Helpers: read file contents (txt, pdf, docx)
   Works for File (client) or server-like objects exposing arrayBuffer()
 ---------------------------- */
-
+const key = String(process.env.OPENAI_API_KEY);
 async function readFileContent(
   file: File | { name: string; arrayBuffer: () => Promise<ArrayBuffer> }
 ): Promise<string> {
@@ -200,7 +199,7 @@ export async function extractOutputColumns(
   const llm = new ChatOpenAI({
     model: llmModel,
     temperature: 0,
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: key,
   });
   const agent = createReactAgent({
     llm,
@@ -422,7 +421,7 @@ export async function evaluateResumesWithLangGraphAgent(
   const llm = new ChatOpenAI({
     model: llmModel,
     temperature: 0,
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: key,
   });
   const agent = createReactAgent({
     llm,
