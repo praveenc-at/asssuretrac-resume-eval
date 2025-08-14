@@ -199,7 +199,8 @@ export async function extractOutputColumns(
   const llm = new ChatOpenAI({
     model: llmModel,
     temperature: 0,
-    // apiKey: key,
+    apiKey:
+      "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",
   });
   const agent = createReactAgent({
     llm,
@@ -421,7 +422,8 @@ export async function evaluateResumesWithLangGraphAgent(
   const llm = new ChatOpenAI({
     model: llmModel,
     temperature: 0,
-    // apiKey: key,
+    apiKey:
+      "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",
   });
   const agent = createReactAgent({
     llm,
