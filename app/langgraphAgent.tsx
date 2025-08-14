@@ -4,8 +4,8 @@ import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { ChatOpenAI } from "@langchain/openai";
 import { z } from "zod";
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-console.log("Using OpenAI API Key:", OPENAI_API_KEY);
+// const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+// console.log("Using OpenAI API Key:", OPENAI_API_KEY);
 // console.log("Using OpenAI API Key:", process.env.OPENAI_API_KEY);
 // const OPENAI_API_KEY="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";
 /* ---------------------------
@@ -200,7 +200,7 @@ export async function extractOutputColumns(
   const llm = new ChatOpenAI({
     model: llmModel,
     temperature: 0,
-    apiKey: OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
   });
   const agent = createReactAgent({
     llm,
@@ -422,7 +422,7 @@ export async function evaluateResumesWithLangGraphAgent(
   const llm = new ChatOpenAI({
     model: llmModel,
     temperature: 0,
-    apiKey: OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
   });
   const agent = createReactAgent({
     llm,
